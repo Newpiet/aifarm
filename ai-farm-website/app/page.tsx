@@ -1,7 +1,8 @@
 "use client";
 
-import { Leaf, Bot, Zap, BrainCircuit, Building, Handshake, Users, Rss, ArrowRight, Menu, X } from 'lucide-react';
+import { Leaf, Zap, BrainCircuit, Building, Handshake, Users, Rss, ArrowRight, Menu, X } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 // --- 数据定义 ---
 
@@ -66,7 +67,7 @@ export default function AIFarmHomePage() {
       const fromTop = window.scrollY + 90;
       let currentActive = 'home';
       for (const section of sectionElements) {
-        if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+        if (section && section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
           currentActive = section.id;
           break;
         }
@@ -77,7 +78,7 @@ export default function AIFarmHomePage() {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navLinks]);
 
   const NavLink = ({ href, label, isActive }) => (
     <a 
@@ -212,7 +213,7 @@ export default function AIFarmHomePage() {
                 <div className="grid lg:grid-cols-3 gap-8">
                     {demoBases.map((base, index) => (
                          <div key={index} className="bg-[#0C3B2E] rounded-lg shadow-lg overflow-hidden group">
-                            <img src={base.imageUrl} alt={base.name} className="w-full h-56 object-cover group-hover:opacity-80 transition-opacity" />
+                            <Image src={base.imageUrl} alt={base.name} width={800} height={600} className="w-full h-56 object-cover group-hover:opacity-80 transition-opacity" />
                             <div className="p-6">
                                 <h3 className="text-2xl font-bold mb-2 text-white">{base.name}</h3>
                                 <p className="text-gray-300">{base.description}</p>
